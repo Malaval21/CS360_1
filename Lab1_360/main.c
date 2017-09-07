@@ -41,8 +41,17 @@ void initialize() // initialize root node / and set root, cwd to /
 	cwd = root;
 }
 char*dirName(char*pathname)
+{	
+	char * pch;
+	char s[128];
+	pch = strrchr(pathname, '/');// last occurence of / char
+	int num = pch - pathname;
+	memcpy(s, pathname, num);
+	s[num] = 0;	
+	return s;
+}
+char*bName(char*pathname)
 {
-	//char s[128];
 	char *ssc;
 	int l = 0;
 	ssc = strstr(pathname, "/");
@@ -51,11 +60,7 @@ char*dirName(char*pathname)
 		pathname = &pathname[strlen(pathname) - l + 2];
 		ssc = strstr(pathname, "/");
 	} while (ssc);
-	printf("%s\n", pathname);
-}
-char*bName(char*pathName)
-{
-
+	return pathname;
 }
 int mkdir(char *pathname)
 {
